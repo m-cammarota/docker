@@ -1,21 +1,25 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 
-# Monta la cartella static
+# Mount static files under /static only (do NOT mount at "/")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get("/", response_class=HTMLResponse)
-async def read_root():
-    with open("static/index.html") as f:
-        return f.read()
+class Item(BaseModel):
+    item_id: int
+    q: Optional[str] = None
 
-@app.get("/api/items/{item_id}")
-def read_item(item_id: int, q: str = None):
+@app.get("/")
+async def read_root():
+    return {"message": "Hello World"}
+
+@app.get("/items/{item_id}", response_model=Item)
+async def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
 
-@app.get("/api/health")
-def health_check():
+@app.get("/health")
+async def health_check():
     return {"status": "healthy"}
