@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>FastAPI Frontend Demo</h1>
+        <p>Benvenuto nella tua API!</p>
+        
+        <div class="card">
+            <h2>Test API</h2>
+            <input type="number" id="itemId" placeholder="Item ID" value="42">
+            <input type="text" id="query" placeholder="Query (opzionale)">
+            <button onclick="fetchItem()">Get Item</button>
+            <div id="result"></div>
+        </div>
+
+        <div class="card">
+            <h2>Health Check</h2>
+            <button onclick="checkHealth()">Check Status</button>
+            <div id="health"></div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
